@@ -23,29 +23,34 @@ public final class DB {
         Properties prop = new Properties();
         
         try {               
-            prop.load(new FileInputStream("db.properties"));   
+            prop.load(new FileInputStream("app.properties"));   
         } catch (Exception ex) {
-            System.out.println("Cannot read file");
+            System.out.println("Cannot read app.properties file");
             System.exit(1); 
         }
         
-        String connection = prop.getProperty("DatabaseConnectionString");     
+        String connectionString = prop.getProperty("DatabaseConnectionString");     
         String user = prop.getProperty("DatabaseUsername");                 
-        String pass = prop.getProperty("DatabasePassword");        
-        
+        String pass = prop.getProperty("DatabasePassword");
+                  
         ds = JdbcConnectionPool.create(
-            connection,
+            connectionString,
             user,
             pass
-        );        
+        ); 
+      
         dbi = new DBI(ds);
     }
-                          
-    private DB(){}
+
+    private DB() {}
     
-    static public Handle getDataSource(){
+    static public Handle getDataSource() {
         return dbi.open();
-    }   
+    }
+    
+    static public DBI getDBI() {
+        return dbi;        
+    }
 }
   
 

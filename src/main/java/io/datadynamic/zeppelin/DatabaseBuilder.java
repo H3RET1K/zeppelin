@@ -26,7 +26,7 @@ public class DatabaseBuilder {
             connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
             connectionHandle.close();
         } catch (Exception ex) {
-            System.out.println("Cannot create in memory database.");
+            System.out.println("Cannot create database stucture.");
             System.exit(1);
         }
         /*
