@@ -23,15 +23,13 @@ public final class DB {
         Properties prop = new Properties();
         
         try {               
-        prop.load(new FileInputStream("db.properties"));   
-        } catch (Exception ex) 
-            {
+            prop.load(new FileInputStream("db.properties"));   
+        } catch (Exception ex) {
             System.out.println("Cannot read file");
             System.exit(1); 
-            }
+        }
         
-        String connection = prop.getProperty("DatabaseConnectionString");
-        String driver = prop.getProperty("DatabaseDriver");
+        String connection = prop.getProperty("DatabaseConnectionString");     
         String user = prop.getProperty("DatabaseUsername");                 
         String pass = prop.getProperty("DatabasePassword");        
         
@@ -42,15 +40,12 @@ public final class DB {
         );        
         dbi = new DBI(ds);
     }
-     
-       
-               
+                          
     private DB(){}
     
     static public Handle getDataSource(){
         return dbi.open();
     }   
-
 }
   
 
