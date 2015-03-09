@@ -31,7 +31,7 @@ public class Main {
         final ResourceConfig rc = new ResourceConfig()
                 .packages("io.datadynamic.zeppelin");        
         rc.property(
-                MustacheMvcFeature.TEMPLATE_BASE_PATH, "Views"
+                MustacheMvcFeature.TEMPLATE_BASE_PATH, "views"
         ).register(
                 MustacheMvcFeature.class
         );

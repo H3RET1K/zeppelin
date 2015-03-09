@@ -27,8 +27,10 @@ public class TestController {
     @Path("currentuser")
     @Produces(MediaType.APPLICATION_XML)
     public User currentuser(@Context SecurityContext secCtx) {        
-        return ((User)secCtx.getUserPrincipal());
-    }   
+        User currentUser = ((User)secCtx.getUserPrincipal());
+        System.out.println(currentUser);
+        return currentUser;
+    }
     
     @GET
     @Path("a")

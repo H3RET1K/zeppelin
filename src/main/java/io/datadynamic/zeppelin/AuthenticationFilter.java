@@ -84,6 +84,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         }
         
         if (!BCrypt.checkpw(password, authenticatingUser.getPassword())) {
+            System.out.println("Unauthorized.");
             throw unauthorized;
         }
         
