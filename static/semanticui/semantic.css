@@ -5597,7 +5597,7 @@ a.ui.inverted.yellow.header:hover {
 /*******************************
              Icon
 *******************************/
-
+/*
 @font-face {
   font-family: 'Icons';
   src: url("themes/default/assets/fonts/icons.eot");
@@ -5608,7 +5608,7 @@ a.ui.inverted.yellow.header:hover {
   text-decoration: inherit;
   text-transform: none;
 }
-
+*/
 i.icon {
   display: inline-block;
   opacity: 1;
