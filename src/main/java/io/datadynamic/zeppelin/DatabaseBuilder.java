@@ -22,8 +22,59 @@ public class DatabaseBuilder {
         */
         try {
             Handle connectionHandle = DB.getDataSource();
-            connectionHandle.execute("CREATE TABLE IF NOT EXISTS users (id identity, username varchar(140), password varchar(max), role varchar(140))");
-            connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
+            
+            //PROJECT TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS projects "
+                    + "(id identity, "
+                    + "name varchar(140), "
+                    + "description varchar(max), "
+                    + "PRIMARY KEY (id))");
+            
+            //USER TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS users "
+                    + "(id identity, "
+                    + "username varchar(140), "
+                    + "password varchar(max), "
+                    + "role varchar(140), "
+                    + "PRIMARY KEY (id))");
+            
+            //STATUS TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS status "
+                    + "(id identity, "
+                    + "name varchar(140), "
+                    + "description varchar(max), "
+                    + "PRIMARY KEY (id))");
+            
+            //ISSUE NOTES TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS issuenotes "
+                    + "(id identity, "
+                    + "userid bigint, "
+                    + "note varchar(max), "
+                    + "datecreated datetime, "
+                    + "PRIMARY KEY (id), "
+                    + "FOREIGN KEY (userid) REFERENCES  public.users(id))");
+            
+            //ISSUES TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS issues "
+                    + "(id identity, "
+                    + "labels varchar(140), "
+                    + "status varchar(140), "
+                    + "description varchar(max), "
+                    + "version varchar(140), "
+                    + "projectid bigint, "
+                    //+ "attachments blob, "
+                    + "assigneduser varchar(140), "
+                    + "noteid bigint, "
+                    + "createddate datetime, "
+                    + "closedate datetime, "
+                    + "PRIMARY KEY (id), "
+                    + "FOREIGN KEY (projectid) REFERENCES public.projects(id), "             
+                    + "FOREIGN KEY (status) REFERENCES public.status(name), "  
+                    + "FOREIGN KEY (noteid) REFERENCES public.issuenotes(id), "
+                    + "FOREIGN KEY (assigneduser) REFERENCES public.users(id))");
+ 
+            //connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
+            
             connectionHandle.close();
         } catch (Exception ex) {
             System.out.println("Cannot create database stucture.");
