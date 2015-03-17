@@ -14,10 +14,10 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper;
  *
  * @author H3RET1K
  */
-public class ProjectMapper implements ResultSetMapper<Projects>
+public class ProjectMapper implements ResultSetMapper<Project>
 {
-    public Projects map(int index, ResultSet r, StatementContext ctx) throws SQLException
+    public Project map(int index, ResultSet r, StatementContext ctx) throws SQLException
     {
-        return new Projects(r.getLong("id"), r.getString("name"), r.getString("description"));
+        return new Project(r.getLong("id"), r.getString("name"), r.getString("description"), r.getString("projectstatus"));
     }
 }   

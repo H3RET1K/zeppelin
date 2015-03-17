@@ -5,10 +5,6 @@
  */
 package io.datadynamic.zeppelin.DAO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,17 +13,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement 
-public class Projects {
+public class Project {
     private long id;
     private String name;
     private String description;
-     
-    public Projects() {}
+    private String projectStatus; 
     
-    public Projects(long id, String name, String description) {
+    public Project() {}
+    
+    public Project(long id, String name, String description, String projectStatus) {
         this.id = id;
         this.name = name;
-        this.description = description;   
+        this.description = description;
+        this.projectStatus = projectStatus;
     }
     
     /**
@@ -71,4 +69,18 @@ public class Projects {
     public void setDescription(String description) {
         this.description = description;
     }    
+
+    /**
+     * @return the projectStatus
+     */
+    public String getProjectStatus() {
+        return projectStatus;
+    }
+
+    /**
+     * @param projectStatus the projectStatus to set
+     */
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
+    }
 }

@@ -13,7 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import org.glassfish.jersey.server.mvc.Viewable;
 

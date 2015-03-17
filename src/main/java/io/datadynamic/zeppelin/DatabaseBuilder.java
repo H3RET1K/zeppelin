@@ -100,7 +100,16 @@ public class DatabaseBuilder {
                     + "ADD FOREIGN KEY (assigneduser) "
                     + "REFERENCES public.users(id)");
  
-            //connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
+            // default data
+            //  ADMIN USER
+            connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
+            
+            //  PROJECT STATUS
+            connectionHandle.execute("insert into projectstatus(description) values ('open')");
+            connectionHandle.execute("insert into projectstatus(description) values ('closed')");
+            //  PROJECT
+            connectionHandle.execute("insert into projects(name, description, projectstatusid) values ('test project', 'this is a test project', 1)");
+            connectionHandle.execute("insert into projects(name, description, projectstatusid) values ('B project', 'this is a B project', 1)");
             
             connectionHandle.close();
         } catch (Exception ex) {

@@ -21,7 +21,6 @@ import javax.ws.rs.core.SecurityContext;
 import org.glassfish.jersey.internal.util.Base64;
 import org.glassfish.jersey.server.ContainerRequest;
 import org.skife.jdbi.v2.Handle;
-import org.skife.jdbi.v2.util.StringMapper;
 
 @Provider
 @PreMatching
@@ -70,11 +69,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         User authenticatingUser;
         try {
             Handle connectionHandle = DB.getDataSource();
-            
-            /*String name = connectionHandle.createQuery("select username from users where username = 'admin'")
-                .map(StringMapper.FIRST)
-                .first();*/
-            
             UserDAO u = connectionHandle.attach(UserDAO.class);
             authenticatingUser = u.getUserByName(username);
             connectionHandle.close();            

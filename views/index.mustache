@@ -28,105 +28,25 @@
                 </div>
             </div>
         </div>
-        <div class="four wide column">
+        {{#.}}
+        <div class="four wide column project" data-id="{{id}}">
             <div class="ui cards">
                 <div class="card">
                     <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
+                        <a class="delete-link" data-id="{{id}}" href="/projects/ID/{{id}}/Delete?ui=true"><i class="right floated fa fa-bomb"></i></a>                        
+                        <div class="header">{{name}}</div>
                         <div class="description">
-                            Elliot Fu is a film-maker from New York.
+                            <p>{{description}}</p>
                         </div>
+                    </div>
+                    <div class="extra content">
+                        <b>{{projectStatus}}</b>
                     </div>
                     <div class="ui bottom attached button">Browse</div>
                 </div>
             </div>
         </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
-        <div class="four wide column">
-            <div class="ui cards">
-                <div class="card">
-                    <div class="content">
-                        <i class="right floated fa fa-bomb"></i>
-                        <div class="header">Elliot Fu</div>
-                        <div class="description">
-                            Elliot Fu is a film-maker from New York.
-                        </div>
-                    </div>
-                    <div class="ui bottom attached button">Browse</div>
-                </div>
-            </div>
-        </div>
+        {{/.}}
     </div>
-
 </body>
 </html>
