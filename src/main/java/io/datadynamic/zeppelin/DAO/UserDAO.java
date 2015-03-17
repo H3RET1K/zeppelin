@@ -18,6 +18,6 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(UserMapper.class)
 public interface UserDAO 
 {
-    @SqlQuery("SELECT top 1 id, username, password, role FROM users where username = :username")
-    public User getUserByName(@Bind("username") String username);
+    @SqlQuery("SELECT top 1 id, name, description, role FROM projects where name = :username")
+    public Projects getUserByName(@Bind("username") String username);
 }

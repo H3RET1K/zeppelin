@@ -28,6 +28,7 @@ public class DatabaseBuilder {
                     + "(id identity, "
                     + "name varchar(140), "
                     + "description varchar(max), "
+                    + "projectstatusid bigint, "
                     + "PRIMARY KEY (id))");
             
             //USER TABLE
@@ -45,20 +46,25 @@ public class DatabaseBuilder {
                     + "description varchar(max), "
                     + "PRIMARY KEY (id))");
             
+             //PROJECT STATUS TABLE
+            connectionHandle.execute("CREATE TABLE IF NOT EXISTS projectstatus "
+                    + "(id identity, "                  
+                    + "description varchar(max), "
+                    + "PRIMARY KEY (id))");
+            
             //ISSUE NOTES TABLE
             connectionHandle.execute("CREATE TABLE IF NOT EXISTS issuenotes "
                     + "(id identity, "
                     + "userid bigint, "
                     + "note varchar(max), "
-                    + "datecreated datetime, "
-                    + "PRIMARY KEY (id), "
-                    + "FOREIGN KEY (userid) REFERENCES  public.users(id))");
+                    + "datedcreated datetime, "
+                    + "PRIMARY KEY (id))");                
             
             //ISSUES TABLE
             connectionHandle.execute("CREATE TABLE IF NOT EXISTS issues "
                     + "(id identity, "
                     + "labels varchar(140), "
-                    + "status varchar(140), "
+                    + "statusid bigint, "
                     + "description varchar(max), "
                     + "version varchar(140), "
                     + "projectid bigint, "
@@ -66,12 +72,33 @@ public class DatabaseBuilder {
                     + "assigneduser varchar(140), "
                     + "noteid bigint, "
                     + "createddate datetime, "
-                    + "closedate datetime, "
-                    + "PRIMARY KEY (id), "
-                    + "FOREIGN KEY (projectid) REFERENCES public.projects(id), "             
-                    + "FOREIGN KEY (status) REFERENCES public.status(name), "  
-                    + "FOREIGN KEY (noteid) REFERENCES public.issuenotes(id), "
-                    + "FOREIGN KEY (assigneduser) REFERENCES public.users(id))");
+                    + "closeddate datetime, "
+                    + "PRIMARY KEY (id))");       
+            
+            //ADD FOREIGN KEYS
+            connectionHandle.execute("ALTER TABLE projects  "
+                    + "ADD FOREIGN KEY (projectstatusid) "
+                    + "REFERENCES public.projectstatus(id)");
+            
+            connectionHandle.execute("ALTER TABLE issuenotes  "
+                    + "ADD FOREIGN KEY (userid) "
+                    + "REFERENCES public.users(id)");
+            
+            connectionHandle.execute("ALTER TABLE issues  "
+                    + "ADD FOREIGN KEY (projectid) "
+                    + "REFERENCES public.projects(id)");
+            
+            connectionHandle.execute("ALTER TABLE issues  "
+                    + "ADD FOREIGN KEY (statusid) "
+                    + "REFERENCES public.status(id)");
+            
+            connectionHandle.execute("ALTER TABLE issues  "                            
+                    + "ADD FOREIGN KEY (noteid) "
+                    + "REFERENCES public.issuenotes(id)");
+            
+            connectionHandle.execute("ALTER TABLE issues  "                              
+                    + "ADD FOREIGN KEY (assigneduser) "
+                    + "REFERENCES public.users(id)");
  
             //connectionHandle.execute("insert into users(username, password, role) values ('admin', ?, 'admin')", BCrypt.hashpw("password", BCrypt.gensalt()));
             
