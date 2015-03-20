@@ -48,7 +48,8 @@ public class DatabaseBuilder {
             
              //PROJECT STATUS TABLE
             connectionHandle.execute("CREATE TABLE IF NOT EXISTS projectstatus "
-                    + "(id identity, "                  
+                    + "(id identity, "      
+                    + "name varchar(140), "
                     + "description varchar(max), "
                     + "PRIMARY KEY (id))");
             
