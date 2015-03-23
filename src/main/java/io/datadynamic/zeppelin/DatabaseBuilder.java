@@ -58,7 +58,7 @@ public class DatabaseBuilder {
                     + "(id identity, "
                     + "userid bigint, "
                     + "note varchar(max), "
-                    + "datedcreated datetime, "
+                    + "datecreated datetime, "
                     + "PRIMARY KEY (id))");                
             
             //ISSUES TABLE

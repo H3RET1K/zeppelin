@@ -19,19 +19,19 @@ public interface ProjectStatusDAO
     @SqlQuery("SELECT top 1 id, name, description FROM projectstatus where id = :id")
     public ProjectStatus getProjectStatusByID(@Bind("id") long id);
     
-    @SqlQuery("SELECT top 1 id, name, description FROM projectstatus wehre name = :name")
+    @SqlQuery("SELECT top 1 id, name, description FROM projectstatus where name = :name")
     public ProjectStatus getProjectStatusByName(@Bind("name") String name);
     
-    @SqlQuery("update projectstatus set name = :name, description = :description")
+    @SqlUpdate("update projectstatus set name = :name, description = :description")
     public int updateProjectStatus(@BindBean ProjectStatus ps); 
     
-    @SqlQuery("insert into projectstatus (name, description) values(:name, :description)")
+    @SqlUpdate("insert into projectstatus (name, description) values(:name, :description)")
     public int createProjectStatus(@BindBean ProjectStatus ps);
     
-    @SqlQuery("delete from projectstatus where id = :id")
+    @SqlUpdate("delete from projectstatus where id = :id")
     public int deleteProjectStatusByID(@Bind("id") long id);
     
-    @SqlQuery("select id, name, description FROM projectstatus")
+    @SqlQuery("select id, name, description FROM projectstatus order by id")
     public List<ProjectStatus> getAllProjectStatus();
         
 }
