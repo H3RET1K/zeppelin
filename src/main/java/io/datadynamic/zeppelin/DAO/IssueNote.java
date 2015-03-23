@@ -13,50 +13,59 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class IssueNote {
     private long id;
-    private long userid; 
+    private long userID; 
     private String note;
-    private String datecreated;
+    private String dateCreated;
+    private String userName;
     
     public IssueNote() {}
     
     public IssueNote(long id, long userid, String note, String datecreated){
         this.id = id;
-        this.userid = userid;
+        this.userID = userid;
         this.note = note;
-        this.datecreated = datecreated;
-        }
-    
-    public long getId(){
+        this.dateCreated = datecreated;
+    }           
+
+    public long getId() {
         return id;
     }
-    
-    public void setId(long id){
+
+    public void setId(long id) {
         this.id = id;
     }
-    
-    public long getUserid(){
-        return userid;
+
+    public long getUserID() {
+        return userID;
     }
-    
-    public void setUserid(long userid){
-        this.userid = userid;
+
+    public void setUserID(long userID) {
+        this.userID = userID;
     }
-    
-    public String getNote(){
+
+    public String getNote() {
         return note;
     }
-    
-    public void setNote(String note){
+
+    public void setNote(String note) {
         this.note = note;
     }
-    
-    public String getDatecreated(){
-        return datecreated;
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
-    public void setDatecreated(String datecreated){
-        this.datecreated = datecreated;
-    }
     
 }
-

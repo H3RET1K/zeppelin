@@ -22,7 +22,7 @@ public interface ProjectStatusDAO
     @SqlQuery("SELECT top 1 id, name, description FROM projectstatus where name = :name")
     public ProjectStatus getProjectStatusByName(@Bind("name") String name);
     
-    @SqlUpdate("update projectstatus set name = :name, description = :description")
+    @SqlUpdate("update projectstatus set name = :name, description = :description where id = :id")
     public int updateProjectStatus(@BindBean ProjectStatus ps); 
     
     @SqlUpdate("insert into projectstatus (name, description) values(:name, :description)")

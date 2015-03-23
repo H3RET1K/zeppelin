@@ -18,6 +18,6 @@ public class IssueNoteMapper implements ResultSetMapper<IssueNote>
 {
      public IssueNote map(int index, ResultSet r, StatementContext ctx) throws SQLException
      {
-         return new IssueNote(r.getLong("id"), r.getLong("userid"), r.getString("note"), r.getString("datecreated"));
+         return new IssueNote(r.getLong("id"), r.getLong("userid"), r.getString("note"), r.getString("dateCreated"));
      }    
 }

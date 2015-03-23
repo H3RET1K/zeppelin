@@ -18,8 +18,17 @@ public class IssueMapper implements ResultSetMapper<Issue>
 {
     public Issue map(int index, ResultSet r, StatementContext ctx) throws SQLException
     {
-        return new Issue(r.getLong("id"), r.getString("labels"), r.getLong("statusid"), r.getString("description"), r.getString("version"), r.getLong("projectid"), 
-                r.getString("assigneduserid"), r.getLong("noteid"), r.getString("createddate"), r.getString("closeddate"));
+        return new Issue(
+            r.getLong("id"), 
+            r.getString("labels"),
+            r.getString("status"),
+            r.getString("description"),
+            r.getString("version"), 
+            r.getString("project"), 
+            r.getString("assignedUser"), 
+            r.getString("createdDate"), 
+            r.getString("closedDate")
+        );
     }
 }   
 

@@ -64,14 +64,12 @@ public class DatabaseBuilder {
             //ISSUES TABLE
             connectionHandle.execute("CREATE TABLE IF NOT EXISTS issues "
                     + "(id identity, "
-                    + "labels varchar(140), "
+                    + "labels varchar(max), "
                     + "statusid bigint, "
                     + "description varchar(max), "
                     + "version varchar(140), "
-                    + "projectid bigint, "
-                    //+ "attachments blob, "
-                    + "assigneduser varchar(140), "
-                    + "noteid bigint, "
+                    + "projectid bigint, "                    
+                    + "assigneduserid bigint, "                    
                     + "createddate datetime, "
                     + "closeddate datetime, "
                     + "PRIMARY KEY (id))");       
@@ -91,14 +89,10 @@ public class DatabaseBuilder {
             
             connectionHandle.execute("ALTER TABLE issues  "
                     + "ADD FOREIGN KEY (statusid) "
-                    + "REFERENCES public.status(id)");
-            
-            connectionHandle.execute("ALTER TABLE issues  "                            
-                    + "ADD FOREIGN KEY (noteid) "
-                    + "REFERENCES public.issuenotes(id)");
+                    + "REFERENCES public.status(id)");           
             
             connectionHandle.execute("ALTER TABLE issues  "                              
-                    + "ADD FOREIGN KEY (assigneduser) "
+                    + "ADD FOREIGN KEY (assigneduserid) "
                     + "REFERENCES public.users(id)");
  
             // default data
