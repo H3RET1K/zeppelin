@@ -21,38 +21,76 @@ import org.skife.jdbi.v2.Handle;
 
 /**
  *
- * @author vgoff
+ * @author H3RET1K
  */
 @Path("issues")
 public class IssuesController {
-    @GET
-    @Path("{issueName}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Issue getIssueByName() {
-       throw new UnsupportedOperationException();
-    }
+//    NO DOA FOR ISSUE BY NAME; SHOULD WE CALL THEM BY NAME SINCE THERE COULD BE MANY? 
+//    @GET
+//    @Path("{issueName}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Issue getIssueByName() {
+//       throw new UnsupportedOperationException();
+//    }
     
     @GET
     @Path("ID/{issueID}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Issue getIssueByID() {
-        throw new UnsupportedOperationException();
+    @Produces(MediaType.APPLICATION_JSON) 
+    public Issue getIssueByID(@PathParam("issueID") long issueID) {
+        try {
+            Handle connectionHandle = DB.getDataSource();
+            IssueDAO i = connectionHandle.attach(IssueDAO.class);
+            Issue issue = i.getIssueByID(issueID);
+            connectionHandle.close();
+            return issue;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
-    
+     
     @GET
     @Path("*")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Issue> getAllIssues() {
-        throw new UnsupportedOperationException();
+        try {
+            Handle connectionHandle = DB.getDataSource();
+            IssueDAO i = connectionHandle.attach(IssueDAO.class);
+            List<Issue> issue = i.getAllIssues();
+            connectionHandle.close();
+            return issue;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return null;
+        }            
     }
-    
+         
     @GET
     @Path("ID/{id}/Update")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean updateIssue() {
-        throw new UnsupportedOperationException();
+    public Boolean updateIssue(
+        @PathParam("id") long id,
+        @QueryParam("labels") String labels,
+        @QueryParam("status") String status,
+        @QueryParam("description") String description,
+        @QueryParam("version") String version,
+        @QueryParam("project") String project,
+        @QueryParam("assignedUser") String assignedUser,
+        @QueryParam("createdDate") String createdDate,
+        @QueryParam("closedDate") String closedDate    
+    ) {
+        try {
+            Handle connectionHandle = DB.getDataSource();
+            IssueDAO i = connectionHandle.attach(IssueDAO.class);
+            i.updateIssue(new Issue(id, labels, status, description, version, project, assignedUser, createdDate, closedDate));
+            connectionHandle.close();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return false;
+        }   
     }
-    
+        
     @GET
     @Path("{issueName}/Add")
     @Produces(MediaType.APPLICATION_JSON)
