@@ -94,14 +94,49 @@ public class IssuesController {
     @GET
     @Path("{issueName}/Add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean addIssue() {
-        throw new UnsupportedOperationException();
+    public Boolean addIssue(
+        @PathParam("issueName") String description,
+        @QueryParam("labels") String labels,
+        @QueryParam("status") String status,
+        @QueryParam("version") String version,
+        @QueryParam("project") String project,
+        @QueryParam("assignedUser") String assignedUser,
+        @QueryParam("createdDate") String createdDate,
+        @QueryParam("closedDate") String closedDate          
+    ) {
+        try {
+            Handle connectionHandle = DB.getDataSource();
+            IssueDAO i = connectionHandle.attach(IssueDAO.class);
+            i.addIssue(new Issue(0, labels, status, description, version, project, assignedUser, createdDate, closedDate));
+            connectionHandle.close();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return false;
+        }
+        
+        
     }    
     
     @GET
     @Path("ID/{id}/Delete")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean deleteIssue() {
-       throw new UnsupportedOperationException();
-    }       
+    public Boolean deleteIssue(
+        @PathParam("id") long id,
+        @DefaultValue("false") @QueryParam("ui") Boolean ui
+    ) {
+       try {
+           Handle connectionHandle = DB.getDataSource();
+           IssueDAO i = connectionHandle.attach(IssueDAO.class);
+           i.deleteIssueID(id);
+           connectionHandle.close();
+           if(ui == true) {
+               //return Response.status(200).entity(new Viewable("/index", "FOO")).build();               
+           }
+           return true;
+       } catch (Exception ex) {
+           System.out.println(ex);
+           return false;
+       }
+    } 
 }

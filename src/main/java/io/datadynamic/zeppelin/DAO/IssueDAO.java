@@ -33,7 +33,7 @@ public interface IssueDAO
             + "inner join users u on u.id = (select top 1 id from users where username = i.assigneduser)"            
             + "where i.id = :id")
     public Issue getIssueByID(@Bind("id") long issueid);
-     
+         
     @SqlQuery("SELECT "
             + "i.id as id, "
             + "i.labels as labels, "
@@ -65,4 +65,17 @@ public interface IssueDAO
     
     @SqlUpdate("delete from issues where id = :id")
     public int deleteIssueID(@Bind("id") long id);
+    
+    @SqlUpdate("insert into issues(labels, statusid, description, version, projectid, userid, createddate, closeddate)"
+            + "values("         
+            + "labels = :labels, "
+            + "statusid = (select top 1 id from status where name = :status), "
+            + "i.description = :description, "
+            + "i.version = :version, "
+            + "i.projectid = (select top 1 id from project where name = :project), "
+            + "i.userid = (select top 1 id from users where username = :username), "            
+            + "i.createddate = :createddate, "
+            + "i.closeddate = :closeddate)")
+    public int addIssue(@BindBean Issue i);
 }
+
