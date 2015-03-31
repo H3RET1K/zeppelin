@@ -25,13 +25,6 @@ import org.skife.jdbi.v2.Handle;
  */
 @Path("issues")
 public class IssuesController {
-//    NO DOA FOR ISSUE BY NAME; SHOULD WE CALL THEM BY NAME SINCE THERE COULD BE MANY? 
-//    @GET
-//    @Path("{issueName}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Issue getIssueByName() {
-//       throw new UnsupportedOperationException();
-//    }
     
     @GET
     @Path("ID/{issueID}")
